@@ -10,7 +10,6 @@ import (
 
 // GetDevnetIndex returns the current host's devnet index (i.e. 0 for guardian-0).
 func GetDevnetIndex() (int, error) {
-	return 0, nil
 	hostname, err := os.Hostname()
 	if err != nil {
 		panic(err)
