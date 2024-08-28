@@ -41,6 +41,8 @@ spec:
             - --host=0.0.0.0
             - --accounts=13
             - --chain-id=1337
+            # required for transfer-verifier testing
+            - --auto-impersonate
           ports:
             - containerPort: 8545
               name: rpc
