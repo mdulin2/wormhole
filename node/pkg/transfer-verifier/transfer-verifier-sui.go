@@ -61,7 +61,7 @@ func (s *SuiTransferVerifier) GetEventFilter() string {
 // that maps the token address and chain ID to the amount requested out of the bridge. It does not return an error, because any faulty
 // events can be skipped, since they would likely fail being processed by the guardian as well. Debug level logging can be used to
 // reveal any potential locations where errors are occurring.
-func (s *SuiTransferVerifier) processEvents(events []SuiEvent, logger *zap.Logger) (requestedOutOfBridge map[string]*big.Int, numEventsProcessed int) {
+func (s *SuiTransferVerifier) processEvents(events []SuiEvent, logger *zap.Logger) (requestedOutOfBridge map[string]*big.Int, numEventsProcessed uint) {
 	// Initialize the map to store the amount requested out of the bridge
 	requestedOutOfBridge = make(map[string]*big.Int)
 
@@ -105,7 +105,7 @@ func (s *SuiTransferVerifier) processEvents(events []SuiEvent, logger *zap.Logge
 	return requestedOutOfBridge, numEventsProcessed
 }
 
-func (s *SuiTransferVerifier) processObjectUpdates(objectChanges []ObjectChange, suiApiConnection SuiApiInterface, logger *zap.Logger) (transferredIntoBridge map[string]*big.Int, numChangesProcessed int, err error) {
+func (s *SuiTransferVerifier) processObjectUpdates(objectChanges []ObjectChange, suiApiConnection SuiApiInterface, logger *zap.Logger) (transferredIntoBridge map[string]*big.Int, numChangesProcessed uint) {
 	transferredIntoBridge = make(map[string]*big.Int)
 
 	for _, objectChange := range objectChanges {
@@ -161,7 +161,7 @@ func (s *SuiTransferVerifier) processObjectUpdates(objectChanges []ObjectChange,
 		numChangesProcessed++
 	}
 
-	return transferredIntoBridge, numChangesProcessed, nil
+	return transferredIntoBridge, numChangesProcessed
 }
 
 func (s *SuiTransferVerifier) ProcessDigest(digest string, suiApiConnection SuiApiInterface, logger *zap.Logger) (uint, error) {
@@ -176,11 +176,7 @@ func (s *SuiTransferVerifier) ProcessDigest(digest string, suiApiConnection SuiA
 	requestedOutOfBridge, numEventsProcessed := s.processEvents(txBlock.Result.Events, logger)
 
 	// process all object changes, indicating funds that are entering the chain
-	transferredIntoBridge, numChangesProcessed, err := s.processObjectUpdates(txBlock.Result.ObjectChanges, suiApiConnection, logger)
-
-	if err != nil {
-		logger.Fatal("Error in processing object changes", zap.Error(err))
-	}
+	transferredIntoBridge, numChangesProcessed := s.processObjectUpdates(txBlock.Result.ObjectChanges, suiApiConnection, logger)
 
 	// TODO: Using `Warn` for testing purposes. Update to Fatal? when ready to go into PR.
 	// TODO: Revisit error handling here.
@@ -209,9 +205,9 @@ func (s *SuiTransferVerifier) ProcessDigest(digest string, suiApiConnection SuiA
 			zap.String("amountIn", amountIn.String()))
 	}
 
-	logger.Info("Digest processed", zap.String("txDigest", digest), zap.Int("numEventsProcessed", numEventsProcessed), zap.Int("numChangesProcessed", numChangesProcessed))
+	logger.Info("Digest processed", zap.String("txDigest", digest), zap.Uint("numEventsProcessed", numEventsProcessed), zap.Uint("numChangesProcessed", numChangesProcessed))
 
-	return uint(numEventsProcessed), nil
+	return numEventsProcessed, nil
 }
 
 type SuiApiResponse interface {
@@ -224,6 +220,7 @@ func suiApiRequest[T SuiApiResponse](rpc string, method string, params string) (
 	// Create the request
 	requestBody := fmt.Sprintf(`{"jsonrpc":"2.0", "id": 1, "method": "%s", "params": %s}`, method, params)
 
+	//nolint:noctx
 	req, err := http.NewRequest("POST", rpc, strings.NewReader(requestBody))
 	if err != nil {
 		return defaultT, fmt.Errorf("cannot create request: %w", err)
