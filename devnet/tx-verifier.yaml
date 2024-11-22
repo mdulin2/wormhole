@@ -45,14 +45,6 @@ spec:
               value: "invalid receipt: no deposits and no transfers"
             - name: ERROR_LOG_PATH
               value: "/logs/error.log"
-          # readinessProbe:
-          #   exec:
-          #     command:
-          #       - test
-          #       - -e
-          #       - "/logs/tx-verify-success"
-          #   initialDelaySeconds: 15
-          #   periodSeconds: 10
       volumes:
       - name: log-volume
         emptyDir: {}
