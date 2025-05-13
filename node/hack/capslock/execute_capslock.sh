@@ -89,10 +89,10 @@ SCRIPT_PATH=$(dirname "$temp")
 # ## Capslock 
 ### Build node as is. Given that this is used to push code in a PR, this should work fine.
 # TODO - should we remove this? Is it necessary?
-echo Building node to ensure that Capslock is able to.
-NODE_PATH=$(realpath $(git rev-parse --git-dir)/../)/
-cd $NODE_PATH
-make node
+# echo Building node to ensure that Capslock is able to.
+# NODE_PATH=$(realpath $(git rev-parse --git-dir)/../)/
+# cd $NODE_PATH
+# make node
 
 if [ $? -ne 0 ]; then
   echo "Building node failed"
