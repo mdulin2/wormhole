@@ -17,4 +17,8 @@ jobs:
       - run: |
          ls -la; 
          cd ./node/hack/capslock;
+
+         export GOPATH=$HOME/go 
+         export GOBIN=$GOPATH/bin 
+         export PATH=$GOBIN:$PATH
          ./execute_capslock.sh
