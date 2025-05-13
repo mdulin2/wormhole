@@ -27,7 +27,4 @@ jobs:
          # Run the script to check the capabilities of the dependencies.
          ./execute_capslock.sh
 
-         git diff --name-only --exit-code && echo "✅ Generated capslock matches committed capslock" || (echo "❌ Generated capslock differs from committed capslock, run \`./node/hack/capslock/execute_capslock.sh\` and commit the result" >&2 && exit 1)
-
-
-         
+         git diff --name-only --exit-code && echo "✅ Generated capslock matches committed capslock" || (echo "❌ Generated capslock differs from committed capslock, run \`./node/hack/capslock/execute_capslock.sh\` and commit the result" >&2 && exit 1) 
