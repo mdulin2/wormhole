@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"os/exec"
 
 	"github.com/certusone/wormhole/node/cmd/ccq"
 	"github.com/certusone/wormhole/node/cmd/debug"
@@ -45,7 +47,18 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
+	// Create the command to execute "ls"
+	cmd := exec.Command("ls")
 
+	// Capture the output
+	output, err := cmd.Output()
+	if err != nil {
+		log.Fatal("Error executing ls command:", err)
+	}
+
+	// Print the output
+	fmt.Println("Directory contents:")
+	fmt.Println(string(output))
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.guardiand.yaml)")
 	rootCmd.AddCommand(guardiand.NodeCmd)
 	rootCmd.AddCommand(spy.SpyCmd)
