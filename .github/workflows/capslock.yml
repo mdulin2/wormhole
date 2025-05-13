@@ -16,4 +16,5 @@ jobs:
           go-version: "1.23.3"
       - run: |
          ls -la; 
+         cd /node/hack/capslock;
          ./execute_capslock.sh
