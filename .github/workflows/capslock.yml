@@ -14,8 +14,8 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: "1.23.3"
-      - run: |
-         ls -la; 
+      - name: Compare generated to committed capslock files
+        run: |
          cd ./node/hack/capslock;
 
          # Configure go items that allow the script to run
@@ -26,4 +26,4 @@ jobs:
          # Run the script to check the capabilities of the dependencies.
          ./execute_capslock.sh
 
-         git diff --name-only --exit-code && echo "✅ Generated capslock matches committed capslock" || (echo "❌ Generated capslock differs from committed capslock, run \`./node/hack/capslock/execute_capslock.sh\` and commit the result" >&2 && exit 1) 
+         git diff --name-only --exit-code && echo "✅ Generated capslock matches committed capslock" || (echo "❌ Generated capslock differs from committed capslock, run \`./node/hack/capslock/execute_capslock.sh\` and commit the result" >&2 && exit 1)
