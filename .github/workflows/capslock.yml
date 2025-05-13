@@ -29,4 +29,5 @@ jobs:
 
          git diff --name-only --exit-code && echo "✅ Generated capslock matches committed capslock" || (echo "❌ Generated capslock differs from committed capslock, run \`./node/hack/capslock/execute_capslock.sh\` and commit the result" >&2 && exit 1)
 
+
          
