@@ -1,0 +1,128 @@
+Package: github.com/gagliardetto/solana-go
+--------------------------------------------------
+  • CAPABILITY_ARBITRARY_EXECUTION (Danger Level: 10)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/gagliardetto/solana-go.init filippo.io/edwards25519.init (*filippo.io/edwards25519.Point).SetBytes (*filippo.io/edwards25519/field.Element).Multiply filippo.io/edwards25519/field.feMul
+    Location: edwards25519.go:67:38
+
+  • CAPABILITY_SYSTEM_CALLS (Danger Level: 8)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/gagliardetto/solana-go.init github.com/gagliardetto/solana-go/text.init github.com/fatih/color.init github.com/mattn/go-isatty.IsTerminal golang.org/x/sys/unix.IoctlGetTermios
+    Location: color.go:23:22
+
+  • CAPABILITY_FILES (Danger Level: 7)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/gagliardetto/solana-go.init github.com/gagliardetto/solana-go/text.init github.com/fatih/color.init (*os.File).Fd
+    Location: color.go:23:35
+
+  • CAPABILITY_READ_SYSTEM_STATE (Danger Level: 3)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/gagliardetto/solana-go.init github.com/streamingfast/logging.IsTraceEnabled os.Getenv
+    Location: logging.go:25:42
+
+
+Package: github.com/spf13/cobra
+--------------------------------------------------
+  • CAPABILITY_ARBITRARY_EXECUTION (Danger Level: 10)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/tendermint/tendermint/libs/cli.NewCompletionCmd$1 (*github.com/spf13/cobra.Command).GenBashCompletion (*bytes.Buffer).WriteTo (*vendor/golang.org/x/crypto/sha3.state).Write vendor/golang.org/x/crypto/sha3.keccakF1600
+    Location: main.go:6:13
+
+  • CAPABILITY_RUNTIME (Danger Level: 9)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/cosmos/cosmos-sdk/server.StartCmd$2 github.com/cosmos/cosmos-sdk/server.startInProcess runtime/pprof.StartCPUProfile
+    Location: main.go:6:13
+
+  • CAPABILITY_UNSAFE_POINTER (Danger Level: 9)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/CosmWasm/wasmd/x/wasm/client/cli.ClearContractAdminCmd$1 (github.com/cosmos/cosmos-sdk/types.AccAddress).String github.com/cosmos/cosmos-sdk/internal/conv.UnsafeBytesToStr
+    Location: main.go:6:13
+
+  • CAPABILITY_EXEC (Danger Level: 9)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/cosmos/cosmos-sdk/client/keys.runListCmd (github.com/cosmos/cosmos-sdk/crypto/keyring.keystore).List (*github.com/99designs/keyring.passKeyring).Get (*os/exec.Cmd).Output
+    Location: main.go:6:13
+
+  • CAPABILITY_SYSTEM_CALLS (Danger Level: 8)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/certusone/wormhole/node/cmd/guardiand.runKeygen github.com/certusone/wormhole/node/pkg/common.LockMemory golang.org/x/sys/unix.Mlockall
+    Location: main.go:6:13
+
+  • CAPABILITY_CGO (Danger Level: 8)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/CosmWasm/wasmd/x/wasm/client/cli.GetCmdLibVersion$1 github.com/CosmWasm/wasmvm.LibwasmvmVersion github.com/CosmWasm/wasmvm/internal/api.LibwasmvmVersion github.com/CosmWasm/wasmvm/internal/api._Cfunc_GoString
+    Location: main.go:6:13
+
+  • CAPABILITY_FILES (Danger Level: 7)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/tendermint/tendermint/cmd/tendermint/commands.testnetFiles os.MkdirAll
+    Location: main.go:6:13
+
+  • CAPABILITY_REFLECT (Danger Level: 7)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/spf13/cobra.init text/template.init
+
+  • CAPABILITY_REFLECT (Danger Level: 7)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).HelpFunc$1 github.com/spf13/cobra.tmpl (*text/template.Template).Execute (*text/template.Template).execute
+    Location: main.go:6:13
+
+  • CAPABILITY_NETWORK (Danger Level: 6)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (net/http.http2StreamError).Error
+    Location: main.go:6:13
+
+  • CAPABILITY_MODIFY_SYSTEM_STATE (Danger Level: 4)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/certusone/wormhole/node/cmd/ccq.runQueryServer os/signal.Notify
+    Location: main.go:6:13
+
+  • CAPABILITY_OPERATING_SYSTEM (Danger Level: 4)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/tendermint/tendermint/cmd/tendermint/commands.NewRunNodeCmd$1 (*github.com/tendermint/tendermint/libs/service.BaseService).Start (*github.com/tendermint/tendermint/proxy.multiAppConn).OnStart (*github.com/tendermint/tendermint/proxy.multiAppConn).killTMOnClientError (*github.com/tendermint/tendermint/proxy.multiAppConn).killTMOnClientError$1 github.com/tendermint/tendermint/libs/os.Kill (*os.Process).Signal
+    Location: main.go:6:13
+
+  • CAPABILITY_READ_SYSTEM_STATE (Danger Level: 3)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC (*github.com/spf13/cobra.Command).execute github.com/wormhole-foundation/wormchain/x/wormhole/client/cli.CmdTestSignAddress$1 os.Getenv
+    Location: main.go:6:13
+
+  • CAPABILITY_UNANALYZED (Danger Level: 3)
+    Path: github.com/certusone/wormhole/node.main github.com/certusone/wormhole/node/cmd.Execute (*github.com/spf13/cobra.Command).Execute (*github.com/spf13/cobra.Command).ExecuteC errors.Is
+    Location: main.go:6:13
+
+
+Package: net/http/pprof
+--------------------------------------------------
+  • CAPABILITY_NETWORK (Danger Level: 6)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/guardiand.init net/http/pprof.init net/http/pprof.init#1 net/http.HandleFunc
+    Location: pprof.go:100:17
+
+
+Package: github.com/ethereum/go-ethereum/rpc
+--------------------------------------------------
+  • CAPABILITY_RUNTIME (Danger Level: 9)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/ethereum/go-ethereum/rpc.init github.com/ethereum/go-ethereum/metrics.init runtime/pprof.Lookup
+    Location: runtime.go:52:36
+
+  • CAPABILITY_CGO (Danger Level: 8)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/ethereum/go-ethereum/rpc.init github.com/ethereum/go-ethereum/rpc._Cfunc_max_socket_path_size github.com/ethereum/go-ethereum/rpc._cgo_runtime_cgocall
+    Location: constants_unix.go:33:40
+
+
+Package: github.com/ethereum/go-ethereum/accounts/abi/bind
+--------------------------------------------------
+  • CAPABILITY_MODIFY_SYSTEM_STATE (Danger Level: 4)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/ethereum/go-ethereum/accounts/abi/bind.init github.com/ethereum/go-ethereum/accounts/keystore.init github.com/rjeczalik/notify.init github.com/rjeczalik/notify.init#1 log.SetFlags
+    Location: debug.go:23:15
+
+
+Package: github.com/ipfs/go-log/v2
+--------------------------------------------------
+  • CAPABILITY_OPERATING_SYSTEM (Danger Level: 4)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/ipfs/go-log/v2.init github.com/ipfs/go-log/v2.init#1 github.com/ipfs/go-log/v2.SetupLogging (*go.uber.org/zap/zapcore.ioCore).With go.uber.org/zap/zapcore.addFields (go.uber.org/zap/zapcore.Field).AddTo go.uber.org/zap/zapcore.encodeStringer (*github.com/prometheus/prometheus/scrape.Target).String (*github.com/prometheus/prometheus/scrape.Target).URL (github.com/prometheus/prometheus/model/labels.Labels).Range github.com/prometheus/prometheus/config.Load$1 os.Expand os.getShellName
+    Location: setup.go:19:14
+
+
+Package: github.com/ethereum/go-ethereum/core/types
+--------------------------------------------------
+  • CAPABILITY_UNANALYZED (Danger Level: 3)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/guardiand.init github.com/certusone/wormhole/node/pkg/txverifier.init github.com/ethereum/go-ethereum/core/types.init github.com/ethereum/go-ethereum/core/types.rlpHash (*sync.Pool).Get
+    Location: block.go:36:26
+
+
+Package: github.com/ethereum/go-ethereum/crypto
+--------------------------------------------------
+  • CAPABILITY_UNSAFE_POINTER (Danger Level: 9)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/ethereum/go-ethereum/crypto.init github.com/ethereum/go-ethereum/crypto/secp256k1.init
+
+
+Package: github.com/cosmos/cosmos-sdk/client
+--------------------------------------------------
+  • CAPABILITY_EXEC (Danger Level: 9)
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/guardiand.init github.com/certusone/wormhole/node/pkg/wormconn.init github.com/cosmos/cosmos-sdk/client.init github.com/cosmos/cosmos-sdk/crypto/keyring.init github.com/99designs/keyring.init github.com/99designs/keyring.init#3 github.com/godbus/dbus.SessionBus github.com/godbus/dbus.SessionBusPrivate github.com/godbus/dbus.getSessionBusAddress github.com/godbus/dbus.getSessionBusPlatformAddress os/exec.Command
+    Location: kwallet.go:24:27
+

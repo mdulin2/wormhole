@@ -1,0 +1,252 @@
+{
+	"capabilityInfo":  [
+		{
+			"packageName":  "main",
+			"capability":  "CAPABILITY_NETWORK",
+			"depPath":  "example.com/includee.init example.com/greetings.init example.com/greetings.init#1 net/http.Post",
+			"path":  [
+				{
+					"name":  "example.com/includee.init",
+					"package":  "example.com/includee"
+				},
+				{
+					"name":  "example.com/greetings.init",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "example.com/greetings.init#1",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "net/http.Post",
+					"site":  {
+						"filename":  "main.go",
+						"line":  "21",
+						"column":  "23"
+					},
+					"package":  "net/http"
+				}
+			],
+			"packageDir":  "example.com/includee",
+			"capabilityType":  "CAPABILITY_TYPE_TRANSITIVE"
+		},
+		{
+			"packageName":  "main",
+			"capability":  "CAPABILITY_READ_SYSTEM_STATE",
+			"depPath":  "example.com/includee.init example.com/greetings.init example.com/greetings.init#1 os.Environ",
+			"path":  [
+				{
+					"name":  "example.com/includee.init",
+					"package":  "example.com/includee"
+				},
+				{
+					"name":  "example.com/greetings.init",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "example.com/greetings.init#1",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "os.Environ",
+					"site":  {
+						"filename":  "main.go",
+						"line":  "17",
+						"column":  "37"
+					},
+					"package":  "os"
+				}
+			],
+			"packageDir":  "example.com/includee",
+			"capabilityType":  "CAPABILITY_TYPE_TRANSITIVE"
+		},
+		{
+			"packageName":  "main",
+			"capability":  "CAPABILITY_MODIFY_SYSTEM_STATE",
+			"depPath":  "example.com/includee.init example.com/greetings.init example.com/greetings.init#1 os.Setenv",
+			"path":  [
+				{
+					"name":  "example.com/includee.init",
+					"package":  "example.com/includee"
+				},
+				{
+					"name":  "example.com/greetings.init",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "example.com/greetings.init#1",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "os.Setenv",
+					"site":  {
+						"filename":  "main.go",
+						"line":  "16",
+						"column":  "11"
+					},
+					"package":  "os"
+				}
+			],
+			"packageDir":  "example.com/includee",
+			"capabilityType":  "CAPABILITY_TYPE_TRANSITIVE"
+		},
+		{
+			"packageName":  "main",
+			"capability":  "CAPABILITY_ARBITRARY_EXECUTION",
+			"depPath":  "example.com/includee.init example.com/greetings.init example.com/greetings.init#1 encoding/json.Marshal (*encoding/json.encodeState).marshal (*encoding/json.encodeState).reflectValue encoding/json.typeEncoder$1 (*sync.WaitGroup).Wait sync.runtime_SemacquireWaitGroup",
+			"path":  [
+				{
+					"name":  "example.com/includee.init",
+					"package":  "example.com/includee"
+				},
+				{
+					"name":  "example.com/greetings.init",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "example.com/greetings.init#1",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "encoding/json.Marshal",
+					"site":  {
+						"filename":  "main.go",
+						"line":  "17",
+						"column":  "26"
+					},
+					"package":  "encoding/json"
+				},
+				{
+					"name":  "(*encoding/json.encodeState).marshal",
+					"site":  {
+						"filename":  "encode.go",
+						"line":  "175",
+						"column":  "18"
+					},
+					"package":  "encoding/json"
+				},
+				{
+					"name":  "(*encoding/json.encodeState).reflectValue",
+					"site":  {
+						"filename":  "encode.go",
+						"line":  "309",
+						"column":  "16"
+					},
+					"package":  "encoding/json"
+				},
+				{
+					"name":  "encoding/json.typeEncoder$1",
+					"site":  {
+						"filename":  "encode.go",
+						"line":  "333",
+						"column":  "17"
+					},
+					"package":  "encoding/json"
+				},
+				{
+					"name":  "(*sync.WaitGroup).Wait",
+					"site":  {
+						"filename":  "encode.go",
+						"line":  "369",
+						"column":  "10"
+					},
+					"package":  "sync"
+				},
+				{
+					"name":  "sync.runtime_SemacquireWaitGroup",
+					"site":  {
+						"filename":  "waitgroup.go",
+						"line":  "118",
+						"column":  "31"
+					},
+					"package":  "sync"
+				}
+			],
+			"packageDir":  "example.com/includee",
+			"capabilityType":  "CAPABILITY_TYPE_TRANSITIVE"
+		},
+		{
+			"packageName":  "main",
+			"capability":  "CAPABILITY_UNANALYZED",
+			"depPath":  "example.com/includee.init example.com/greetings.init example.com/greetings.init#1 io/ioutil.ReadAll io.ReadAll",
+			"path":  [
+				{
+					"name":  "example.com/includee.init",
+					"package":  "example.com/includee"
+				},
+				{
+					"name":  "example.com/greetings.init",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "example.com/greetings.init#1",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "io/ioutil.ReadAll",
+					"site":  {
+						"filename":  "main.go",
+						"line":  "26",
+						"column":  "25"
+					},
+					"package":  "io/ioutil"
+				},
+				{
+					"name":  "io.ReadAll",
+					"site":  {
+						"filename":  "ioutil.go",
+						"line":  "28",
+						"column":  "19"
+					},
+					"package":  "io"
+				}
+			],
+			"packageDir":  "example.com/includee",
+			"capabilityType":  "CAPABILITY_TYPE_TRANSITIVE"
+		},
+		{
+			"packageName":  "main",
+			"capability":  "CAPABILITY_REFLECT",
+			"depPath":  "example.com/includee.init example.com/greetings.init encoding/json.init reflect.TypeFor[encoding.TextMarshaler]",
+			"path":  [
+				{
+					"name":  "example.com/includee.init",
+					"package":  "example.com/includee"
+				},
+				{
+					"name":  "example.com/greetings.init",
+					"package":  "example.com/greetings"
+				},
+				{
+					"name":  "encoding/json.init",
+					"package":  "encoding/json"
+				},
+				{
+					"name":  "reflect.TypeFor[encoding.TextMarshaler]",
+					"site":  {
+						"filename":  "encode.go",
+						"line":  "385",
+						"column":  "61"
+					},
+					"package":  "reflect"
+				}
+			],
+			"packageDir":  "example.com/includee",
+			"capabilityType":  "CAPABILITY_TYPE_TRANSITIVE"
+		}
+	],
+	"moduleInfo":  [
+		{
+			"path":  "example.com/greetings",
+			"version":  "v0.0.0-00010101000000-000000000000"
+		}
+	],
+	"packageInfo":  [
+		{
+			"path":  "example.com/greetings"
+		},
+		{
+			"path":  "example.com/includee"
+		}
+	]
+}
