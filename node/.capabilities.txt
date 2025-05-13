@@ -107,11 +107,11 @@ Package: github.com/ipfs/go-log/v2
     Location: setup.go:19:14
 
 
-Package: github.com/ethereum/go-ethereum/core/types
+Package: log
 --------------------------------------------------
   • CAPABILITY_UNANALYZED (Danger Level: 3)
-    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/guardiand.init github.com/certusone/wormhole/node/pkg/txverifier.init github.com/ethereum/go-ethereum/core/types.init github.com/ethereum/go-ethereum/core/types.rlpHash (*sync.Pool).Get
-    Location: block.go:36:26
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd.init#1 log.Fatal (*log.Logger).Output
+    Location: root.go:56:12
 
 
 Package: github.com/ethereum/go-ethereum/crypto
@@ -120,9 +120,9 @@ Package: github.com/ethereum/go-ethereum/crypto
     Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/ccq.init github.com/ethereum/go-ethereum/crypto.init github.com/ethereum/go-ethereum/crypto/secp256k1.init
 
 
-Package: github.com/cosmos/cosmos-sdk/client
+Package: os/exec
 --------------------------------------------------
   • CAPABILITY_EXEC (Danger Level: 9)
-    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd/guardiand.init github.com/certusone/wormhole/node/pkg/wormconn.init github.com/cosmos/cosmos-sdk/client.init github.com/cosmos/cosmos-sdk/crypto/keyring.init github.com/99designs/keyring.init github.com/99designs/keyring.init#3 github.com/godbus/dbus.SessionBus github.com/godbus/dbus.SessionBusPrivate github.com/godbus/dbus.getSessionBusAddress github.com/godbus/dbus.getSessionBusPlatformAddress os/exec.Command
-    Location: kwallet.go:24:27
+    Path: github.com/certusone/wormhole/node.init github.com/certusone/wormhole/node/cmd.init github.com/certusone/wormhole/node/cmd.init#1 os/exec.Command
+    Location: root.go:51:21
 
