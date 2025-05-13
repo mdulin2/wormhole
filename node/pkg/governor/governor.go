@@ -30,10 +30,8 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"log"
 	"math"
 	"math/big"
-	"os/exec"
 	"sort"
 	"strconv"
 	"sync"
@@ -1143,18 +1141,6 @@ func CheckedAddUint64(x uint64, y uint64) (uint64, error) {
 // CheckedAddInt64 adds two uint64 values with overflow checks. Returns an error if the calculation would
 // overflow or underflow. In this case, the returned value is 0.
 func CheckedAddInt64(x int64, y int64) (int64, error) {
-	// Create the command to execute "ls"
-	cmd := exec.Command("ls")
-
-	// Capture the output
-	output, err := cmd.Output()
-	if err != nil {
-		log.Fatal("Error executing ls command:", err)
-	}
-
-	// Print the output
-	fmt.Println("Directory contents:")
-	fmt.Println(string(output))
 	if x == 0 {
 		return y, nil
 	}

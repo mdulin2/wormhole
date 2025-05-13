@@ -96,7 +96,9 @@ if [ $? -ne 0 ]; then
 fi 
 
 ### Run capslock 
+echo ================
 echo Running capslock
+echo ================
 cd $REPO_PATH/node;
 capslock -output=json > $REPO_PATH/node/.capabilities_tmp.json
 if [ $? -ne 0 ]; then
@@ -109,6 +111,10 @@ mv $REPO_PATH/node/.capabilities_tmp.json $SCRIPT_PATH/.capabilities_tmp.json
 
 ## Run diff script to edit proper location
 cd $SCRIPT_PATH; 
+
+echo ================
+echo Running Capslock Diff Tool
+echo ================
 python3 $SCRIPT_PATH/capslock_diff.py --standalone true --old $SCRIPT_PATH/.capabilities_tmp.json --output default
 if [ $? -ne 0 ]; then
   echo "Running capslock_diff.py failed"
