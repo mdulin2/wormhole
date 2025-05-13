@@ -10,6 +10,7 @@ jobs:
   capslock:
     runs-on: ubuntu-24.04
     steps:
+      - name: Check if generated capslock matches commited capslock
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:

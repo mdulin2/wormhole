@@ -87,12 +87,7 @@ temp=$( realpath "$0"  )
 SCRIPT_PATH=$(dirname "$temp")
 
 # ## Capslock 
-### Build node as is. Given that this is used to push code in a PR, this should work fine.
-# TODO - should we remove this? Is it necessary?
-# echo Building node to ensure that Capslock is able to.
-# NODE_PATH=$(realpath $(git rev-parse --git-dir)/../)/
-# cd $NODE_PATH
-# make node
+REPO_PATH=$(realpath $(git rev-parse --git-dir)/../)/
 
 if [ $? -ne 0 ]; then
   echo "Building node failed"
@@ -102,15 +97,15 @@ fi
 
 ### Run capslock 
 echo Running capslock
-cd $NODE_PATH/node;
-capslock -output=json > $NODE_PATH/node/.capabilities_tmp.json
+cd $REPO_PATH/node;
+capslock -output=json > $REPO_PATH/node/.capabilities_tmp.json
 if [ $? -ne 0 ]; then
   echo "Running capslock failed"
   exit 1
 fi 
 
 ## Copy capslock file 
-mv $NODE_PATH/node/.capabilities_tmp.json $SCRIPT_PATH/.capabilities_tmp.json
+mv $REPO_PATH/node/.capabilities_tmp.json $SCRIPT_PATH/.capabilities_tmp.json
 
 ## Run diff script to edit proper location
 cd $SCRIPT_PATH; 
