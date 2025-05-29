@@ -5,7 +5,7 @@ on:
     # paths: # Only run when there are changes to dependencies
     #   - './node/go.mod'
     #   - './node/go.sum'
-    types: [opened,edited]
+    types: [opened,synchronize]
 permissions:
   pull-requests: write # Needs to read the contents of PRs
 
