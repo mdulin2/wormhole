@@ -2,28 +2,14 @@ name: Dependency Change
 on:
   workflow_dispatch: # Mostly for testing
   pull_request_target:
-    # paths: # Only run when there are changes to dependencies
-    #   - './node/go.mod'
-    #   - './node/go.sum'
+    paths: # Only run when there are changes to dependencies
+      - './node/go.mod'
+      - './node/go.sum'
     types: [opened,synchronize]
 permissions:
   pull-requests: write # Needs to read the contents of PRs
 
-jobs: 
-  # run-on-mod: 
-  #   runs-on: ubuntu-24.04
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4 # Or your preferred/latest version
-  #       # This step checks out your repository code into GITHUB_WORKSPACE
-  #     - name: Add comment to PR
-  #       env:
-  #         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Authenticate GitHub CLI via GITHUB TOKEN
-  #         PR_NUMBER: ${{ github.event.number }}     # Get PR number from the event payload
-  #         COMMENT_BODY: "Dependency has been upgraded. This needs to be reviewed manually by Asymmetric Research."
-  #       run: |
-  #         echo "Commenting on PR #$PR_NUMBER"
-  #         gh pr comment "$PR_NUMBER" --body "$COMMENT_BODY"
+jobs:
   run-on-mod:
     runs-on: ubuntu-24.04
     steps:
@@ -83,4 +69,5 @@ jobs:
               console.log("New comment posted successfully.");
               // core.setOutput('comment_action', 'created');
             }
-            
+      - name: Force failure
+        run: exit 1
