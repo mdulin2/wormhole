@@ -24,6 +24,8 @@ jobs:
   #       run: |
   #         echo "Commenting on PR #$PR_NUMBER"
   #         gh pr comment "$PR_NUMBER" --body "$COMMENT_BODY"
+  run-on-mod:
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code # May not be strictly needed for commenting, but often present
         uses: actions/checkout@v4
