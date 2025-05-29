@@ -10,17 +10,76 @@ permissions:
   pull-requests: write # Needs to read the contents of PRs
 
 jobs: 
-  run-on-mod: 
-    runs-on: ubuntu-24.04
+  # run-on-mod: 
+  #   runs-on: ubuntu-24.04
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4 # Or your preferred/latest version
+  #       # This step checks out your repository code into GITHUB_WORKSPACE
+  #     - name: Add comment to PR
+  #       env:
+  #         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Authenticate GitHub CLI via GITHUB TOKEN
+  #         PR_NUMBER: ${{ github.event.number }}     # Get PR number from the event payload
+  #         COMMENT_BODY: "Dependency has been upgraded. This needs to be reviewed manually by Asymmetric Research."
+  #       run: |
+  #         echo "Commenting on PR #$PR_NUMBER"
+  #         gh pr comment "$PR_NUMBER" --body "$COMMENT_BODY"
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 # Or your preferred/latest version
-        # This step checks out your repository code into GITHUB_WORKSPACE
-      - name: Add comment to PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Authenticate GitHub CLI via GITHUB TOKEN
-          PR_NUMBER: ${{ github.event.number }}     # Get PR number from the event payload
-          COMMENT_BODY: "Dependency has been upgraded. This needs to be reviewed manually by Asymmetric Research."
-        run: |
-          echo "Commenting on PR #$PR_NUMBER"
-          gh pr comment "$PR_NUMBER" --body "$COMMENT_BODY"
+      - name: Checkout code # May not be strictly needed for commenting, but often present
+        uses: actions/checkout@v4
+
+      - name: Check for existing comment and post/update if needed
+        uses: actions/github-script@v7
+        id: pr_comment # Give an ID to access outputs if needed
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.issue.number; // PR number
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            
+            // Define a unique signature to identify comments from this action
+            const commentSignature = "Dependency Checker";
+            
+            // Define the body of the comment you want to post/update
+            // You can make this dynamic based on other job outputs or conditions
+            let newCommentBody = `${commentSignature}\nThis is an automated update from our awesome GitHub Action!\n`;
+            newCommentBody += `Last check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+
+            let existingCommentId = null;
+
+            // Loop through existing comments to find one with our signature
+            // The github.paginate.iterator handles pagination automatically.
+            console.log(`Listing comments for PR #${prNumber}...`);
+            for await (const page of github.paginate.iterator(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number: prNumber,
+            })) {
+              for (const comment of page.data) {
+                // Check if the comment is from the actions bot and contains the signature
+                if (comment.user.login === 'github-actions[bot]' && comment.body.includes(commentSignature)) {
+                  existingCommentId = comment.id;
+                  console.log(`Found existing comment with ID: ${existingCommentId}`);
+                  break;
+                }
+              }
+              if (existingCommentId) {
+                break; // Stop iterating if found
+              }
+            }
+
+            if (existingCommentId) {
+              console.log("Comment already exists. Skipping.")
+            } else {
+              console.log("No existing comment with signature found. Posting a new comment.");
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                body: newCommentBody
+              });
+              console.log("New comment posted successfully.");
+              // core.setOutput('comment_action', 'created');
+            }
+            
