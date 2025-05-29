@@ -7,7 +7,7 @@ on:
       - 'node/go.sum'
     types: [opened,synchronize]
 permissions:
-  pull-requests: write # Needs to read the contents of PRs
+  pull-requests: write # Needs to write the contents of PRs
 
 jobs:
   run-on-mod:
