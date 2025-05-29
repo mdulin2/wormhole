@@ -3,8 +3,8 @@ on:
   workflow_dispatch: # Mostly for testing
   pull_request_target:
     paths: # Only run when there are changes to dependencies
-      - './node/go.mod'
-      - './node/go.sum'
+      - 'node/go.mod'
+      - 'node/go.sum'
     types: [opened,synchronize]
 permissions:
   pull-requests: write # Needs to read the contents of PRs
