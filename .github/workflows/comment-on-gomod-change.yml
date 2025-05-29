@@ -41,12 +41,11 @@ jobs:
             const repo = context.repo.repo;
             
             // Define a unique signature to identify comments from this action
-            const commentSignature = "Dependency Checker";
+            const commentSignature = "## Dependency Checker";
             
             // Define the body of the comment you want to post/update
             // You can make this dynamic based on other job outputs or conditions
-            let newCommentBody = `${commentSignature}\nThis is an automated update from our awesome GitHub Action!\n`;
-            newCommentBody += `Last check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            let newCommentBody = `${commentSignature}\nAutomated reminder that a dependency has been modified. This should be reviewed by **Asymmetric Research** before being accepted.\n`;
 
             let existingCommentId = null;
 
