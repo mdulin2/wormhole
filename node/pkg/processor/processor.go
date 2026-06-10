@@ -545,6 +545,12 @@ func (p *Processor) Run(ctx context.Context) error {
 				if ok {
 					p.logger.Info("processor: process message publication using main processing loop")
 
+					// As a delegated guardian, verify a reobservation against the canonical VAA
+					// (local store, then Wormholescan) before broadcasting it to the canonical guardians.
+					if !VerifyReobservation(ctx, p.logger, p.db, k) {
+						continue
+					}
+
 					// Send messages to the Notary first. If messages are not approved, they should not continue
 					// to the Governor or the Accountant.
 					if !p.processWithNotary(k) {

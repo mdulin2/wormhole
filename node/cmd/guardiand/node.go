@@ -42,6 +42,7 @@ import (
 	"github.com/certusone/wormhole/node/pkg/devnet"
 	"github.com/certusone/wormhole/node/pkg/node"
 	"github.com/certusone/wormhole/node/pkg/p2p"
+	"github.com/certusone/wormhole/node/pkg/processor"
 	"github.com/certusone/wormhole/node/pkg/supervisor"
 	promremotew "github.com/certusone/wormhole/node/pkg/telemetry/prom_remote_write"
 	"github.com/certusone/wormhole/node/pkg/txverifier"
@@ -266,6 +267,8 @@ var (
 	unsafeDevMode *bool
 	testnetMode   *bool
 	nodeName      *string
+
+	reobservationConsistencyCheck *string
 
 	publicRPC *string
 	publicWeb *string
@@ -532,6 +535,8 @@ func init() {
 	testnetMode = NodeCmd.Flags().Bool("testnetMode", false, "Launch node in testnet mode (enables testnet-only features)")
 	nodeName = NodeCmd.Flags().String("nodeName", "", "Node name to announce in gossip heartbeats")
 
+	reobservationConsistencyCheck = NodeCmd.Flags().String("reobservationConsistencyCheck", "off", "Reobservation consistency check mode: off, local (compare against the local signed-VAA store), remote (compare against Wormholescan; mainnet/testnet only), or all (both)")
+
 	publicRPC = NodeCmd.Flags().String("publicRPC", "", "Listen address for public gRPC interface")
 	publicWeb = NodeCmd.Flags().String("publicWeb", "", "Listen address for public REST and gRPC Web interface")
 
@@ -690,6 +695,20 @@ func runNode(cmd *cobra.Command, args []string) {
 	// Override the default go-log config, which uses a magic environment variable.
 	logger.Info("setting level for all loggers", zap.String("level", logger.Level().String()))
 	ipfslog.SetAllLoggers(lvl)
+
+	// Configure the reobservation consistency check. The 'local' mode works on every
+	// environment; the 'remote'/'all' modes need Wormholescan, which has no devnet endpoint,
+	// so selecting a remote mode there is a fatal misconfiguration.
+	reobsMode, err := processor.ParseReobsCheckMode(*reobservationConsistencyCheck)
+	if err != nil {
+		logger.Fatal("invalid --reobservationConsistencyCheck", zap.Error(err))
+	}
+	reobsURL, reobsSupported := processor.WormholescanURLForEnv(env)
+	if reobsMode.UsesRemote() && !reobsSupported {
+		logger.Fatal("reobservation consistency check 'remote'/'all' mode requires Wormholescan, which is not available on this environment",
+			zap.String("env", string(env)), zap.String("mode", reobsMode.String()))
+	}
+	processor.ConfigureReobservationCheck(reobsMode, reobsURL)
 
 	if viper.ConfigFileUsed() != "" {
 		logger.Info("loaded config file", zap.String("filePath", viper.ConfigFileUsed()))

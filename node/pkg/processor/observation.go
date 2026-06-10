@@ -115,6 +115,11 @@ func (p *Processor) handleMessagePublication(ctx context.Context, k *node_common
 		return nil
 	}
 
+	// Reobservations are checked against the canonical VAA (local store, then Wormholescan); a divergent one is dropped.
+	if !VerifyReobservation(ctx, p.logger, p.db, k) {
+		return nil
+	}
+
 	if !p.processWithNotary(k) || !p.processWithGovernor(k) {
 		return nil
 	}
