@@ -10,6 +10,11 @@ import (
 	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
+// errAccountNotFinalized indicates that a message account still has non-zeroed fields that must
+// be empty once the account is finalized. Callers map this to the "unfinalized_account" skip metric
+// to distinguish it from generic parse failures.
+var errAccountNotFinalized = errors.New("account is not finalized")
+
 // buildMessagePublicationFromAccountData is the deterministic account-message parser/builder boundary.
 // It must not perform network requests; callers are responsible for fetching account bytes, proving account ownership, and converting bytes to MessageAccountData before calling it.
 func (s *SolanaWatcher) buildMessagePublicationFromAccountData(messageAccount solana.PublicKey, messageAccountData MessageAccountData, txSignature solana.Signature, isReobservation bool, useSignatureAsTxID bool) (*common.MessagePublication, error) {
@@ -22,7 +27,7 @@ func (s *SolanaWatcher) buildMessagePublicationFromAccountData(messageAccount so
 	if s.chainID != vaa.ChainIDPythNet {
 		// SECURITY: ensure these fields are zeroed out. in the legacy solana program they were always zero, and in the 2023 rewrite they are zeroed once the account is finalized
 		if !bytes.Equal(proposal.EmitterAuthority.Bytes(), emptyAddressBytes) || proposal.MessageStatus != 0 || !bytes.Equal(proposal.Gap[:], emptyGapBytes) {
-			return nil, errors.New("account is not finalized")
+			return nil, errAccountNotFinalized
 		}
 	}
 

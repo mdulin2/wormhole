@@ -1018,6 +1018,17 @@ func (s *SolanaWatcher) processAccountSubscriptionData(_ context.Context, data [
 func (s *SolanaWatcher) processMessageAccount(logger *zap.Logger, messageAccountData MessageAccountData, acc solana.PublicKey, isReobservation bool, signature solana.Signature, useSignatureAsTxID bool) (numObservations uint32) {
 	observation, err := s.buildMessagePublicationFromAccountData(acc, messageAccountData, signature, isReobservation, useSignatureAsTxID)
 	if err != nil {
+		// Track unfinalized accounts under their own skip metric so they can be
+		// distinguished from generic parse failures in monitoring.
+		if errors.Is(err, errAccountNotFinalized) {
+			solanaAccountSkips.WithLabelValues(s.networkName, "unfinalized_account").Inc()
+			logger.Error(
+				"account is not finalized",
+				zap.Stringer("account", acc),
+				zap.String("data", messageAccountData.String()),
+			)
+			return
+		}
 		solanaAccountSkips.WithLabelValues(s.networkName, "parse_transfer_out").Inc()
 		logger.Error(
 			"failed to parse transfer proposal",
